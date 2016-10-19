@@ -6,7 +6,7 @@
 
   <groupId>in.tazj.java</groupId>
   <artifactId>javaslang-matchers</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <description>Hamcrest 2 matchers for Javaslang types</description>
   <build>
     <plugins>
