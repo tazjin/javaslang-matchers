@@ -6,7 +6,13 @@ import org.hamcrest.TypeSafeMatcher;
 
 import javaslang.Value;
 
+/**
+ * Provides Hamcret matchers that can be used with any Javaslang value type.
+ * */
 public class ValueMatchers {
+  /**
+   * Matches any empty (undefined) Javaslang value.
+   */
   public static <T extends Value> Matcher<T> isEmpty() {
     return new TypeSafeMatcher<T>() {
       @Override

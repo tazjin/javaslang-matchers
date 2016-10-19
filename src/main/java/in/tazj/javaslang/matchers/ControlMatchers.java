@@ -5,6 +5,8 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 import javaslang.control.Either;
+import javaslang.control.Either.Left;
+import javaslang.control.Either.Right;
 import javaslang.control.Option;
 import javaslang.control.Try;
 
@@ -12,6 +14,9 @@ import javaslang.control.Try;
  * Provides Hamcrest matchers for types from Javaslang's control package.
  */
 public class ControlMatchers {
+  /**
+   * Matches a Javaslang {@link Option} that has a defined value.
+   */
   public static Matcher<Option> isDefined() {
     return new TypeSafeMatcher<Option>() {
       @Override
@@ -26,6 +31,9 @@ public class ControlMatchers {
     };
   }
 
+  /**
+   * Matches a Javaslang {@link Option} that has no defined value.
+   */
   public static Matcher<Option> isEmpty() {
     return new TypeSafeMatcher<Option>() {
       @Override
@@ -40,6 +48,9 @@ public class ControlMatchers {
     };
   }
 
+  /**
+   * Matches a Javaslang {@link Try} that succeeded.
+   */
   public static Matcher<Try> isSuccess() {
     return new TypeSafeMatcher<Try>() {
       @Override
@@ -54,6 +65,9 @@ public class ControlMatchers {
     };
   }
 
+  /**
+   * Matches a Javaslang {@link Try} that failed.
+   */
   public static Matcher<Try> isFailure() {
     return new TypeSafeMatcher<Try>() {
       @Override
@@ -69,7 +83,7 @@ public class ControlMatchers {
   }
 
   /**
-   * Provides a matcher for {@link Try} that matches a failure with a given exception type.
+   * Matches a Javaslang {@link Try} that failed with an expected exception type.
    *
    * @param clazz The expected exception type.
    */
@@ -96,6 +110,9 @@ public class ControlMatchers {
     };
   }
 
+  /**
+   * Matches a Javaslang {@link Either} that contains a {@link Right} value.
+   */
   public static Matcher<Either> isRight() {
     return new TypeSafeMatcher<Either>() {
       @Override
@@ -110,6 +127,9 @@ public class ControlMatchers {
     };
   }
 
+  /**
+   * Matches a Javaslang {@link Either} that contains a {@link Left} value.
+   */
   public static Matcher<Either> isLeft() {
     return new TypeSafeMatcher<Either>() {
       @Override

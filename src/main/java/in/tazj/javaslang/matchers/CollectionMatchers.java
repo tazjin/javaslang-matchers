@@ -6,7 +6,13 @@ import org.hamcrest.TypeSafeMatcher;
 
 import javaslang.collection.Traversable;
 
+/**
+ * Provides Hamcrest matchers for Javaslang collection types.
+ * */
 public class CollectionMatchers {
+  /**
+   * Matches empty Javaslang {@link Traversable}.
+   */
   public static <T extends Traversable> Matcher<T> isEmpty() {
     return new TypeSafeMatcher<T>() {
       @Override
@@ -27,11 +33,19 @@ public class CollectionMatchers {
     };
   }
 
+  /**
+   * Matches Javaslang Traversable with a given size.
+   *
+   * @param size The expected size of the traversable.
+   */
   public static <T extends Traversable> Matcher<T> hasSize(int size) {
     return new TypeSafeMatcher<T>() {
       @Override
       protected boolean matchesSafely(T t) {
-        return (t.size() == size);
+        if (t.hasDefiniteSize()) {
+          return (t.size() == size);
+        }
+        return false;
       }
 
       @Override
@@ -49,7 +63,12 @@ public class CollectionMatchers {
     };
   }
 
-  public static<E, T extends Traversable<E>> Matcher<T> contains(E element) {
+  /**
+   * Matches Javaslang Traversable that contains a certain element.
+   *
+   * @param element The expected element.
+   */
+  public static <E, T extends Traversable<E>> Matcher<T> contains(E element) {
     return new TypeSafeMatcher<T>() {
       @Override
       protected boolean matchesSafely(T es) {
@@ -63,6 +82,11 @@ public class CollectionMatchers {
     };
   }
 
+  /**
+   * Matches Javaslang traversable that contains expected elements in any order.
+   *
+   * @param items The expected elements.
+   */
   public static <E, T extends Traversable<E>> Matcher<T> containsInAnyOrder(Traversable<E> items) {
     return new TypeSafeMatcher<T>() {
       @Override
