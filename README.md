@@ -1,6 +1,8 @@
 Javaslang Hamcrest matchers
 ===========================
 
+[![Build Status](https://travis-ci.org/tazjin/javaslang-matchers.svg?branch=master)](https://travis-ci.org/tazjin/javaslang-matchers)
+
 Provides a set of useful Hamcrest matchers for operating on Javaslang values.
 
 This makes it possible to easily define Hamcrest-style assertions on types such as 
