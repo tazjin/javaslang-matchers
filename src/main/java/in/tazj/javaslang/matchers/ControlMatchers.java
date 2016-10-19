@@ -45,6 +45,11 @@ public class ControlMatchers {
       public void describeTo(Description description) {
         description.appendText("Optional value should not be defined");
       }
+
+      @Override
+      public void describeMismatchSafely(Option option, Description mismatch) {
+        mismatch.appendText("Expected empty Option but found ").appendValue(option.get());
+      }
     };
   }
 
@@ -61,6 +66,12 @@ public class ControlMatchers {
       @Override
       public void describeTo(Description description) {
         description.appendText("Try should have succeeded");
+      }
+
+      @Override
+      public void describeMismatchSafely(Try aTry, Description mismatch) {
+        mismatch.appendText("Expected success but got ")
+            .appendValue(aTry.getCause());
       }
     };
   }
