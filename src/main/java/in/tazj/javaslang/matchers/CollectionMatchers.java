@@ -68,7 +68,7 @@ public class CollectionMatchers {
    *
    * @param element The expected element.
    */
-  public static <E, T extends Traversable<E>> Matcher<T> contains(E element) {
+  public static <E, T extends Traversable<E>> Matcher<T> containsElement(E element) {
     return new TypeSafeMatcher<T>() {
       @Override
       protected boolean matchesSafely(T es) {

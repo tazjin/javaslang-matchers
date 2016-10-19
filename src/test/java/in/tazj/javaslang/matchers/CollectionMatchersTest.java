@@ -8,7 +8,7 @@ import org.mockito.stubbing.Answer;
 
 import javaslang.collection.List;
 
-import static in.tazj.javaslang.matchers.CollectionMatchers.contains;
+import static in.tazj.javaslang.matchers.CollectionMatchers.containsElement;
 import static in.tazj.javaslang.matchers.CollectionMatchers.containsInAnyOrder;
 import static in.tazj.javaslang.matchers.CollectionMatchers.hasSize;
 import static in.tazj.javaslang.matchers.CollectionMatchers.isEmpty;
@@ -31,10 +31,10 @@ public class CollectionMatchersTest {
   }
 
   @Test
-  public void testContains() throws Exception {
-    assertThat(List.of(1,2,3), contains(2));
-    assertThat(List.of(1,2,3), not(contains(4)));
-    assertThat(List.empty(), not(contains(1)));
+  public void testContainsElement() throws Exception {
+    assertThat(List.of(1,2,3), containsElement(2));
+    assertThat(List.of(1,2,3), not(containsElement(4)));
+    assertThat(List.empty(), not(containsElement(1)));
   }
 
   @Test
