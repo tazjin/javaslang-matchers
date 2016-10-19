@@ -11,7 +11,7 @@ import javaslang.Value;
  * */
 public class ValueMatchers {
   /**
-   * Matches any empty (undefined) Javaslang value.
+   * Matches any empty (undefined) Javaslang {@link Value}.
    */
   public static <T extends Value> Matcher<T> isEmpty() {
     return new TypeSafeMatcher<T>() {

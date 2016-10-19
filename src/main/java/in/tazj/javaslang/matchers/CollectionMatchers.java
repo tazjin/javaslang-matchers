@@ -34,7 +34,7 @@ public class CollectionMatchers {
   }
 
   /**
-   * Matches Javaslang Traversable with a given size.
+   * Matches Javaslang {@link Traversable} with a given size.
    *
    * @param size The expected size of the traversable.
    */
@@ -64,7 +64,7 @@ public class CollectionMatchers {
   }
 
   /**
-   * Matches Javaslang Traversable that contains a certain element.
+   * Matches Javaslang {@link Traversable} that contains a certain element.
    *
    * @param element The expected element.
    */
@@ -83,7 +83,7 @@ public class CollectionMatchers {
   }
 
   /**
-   * Matches Javaslang traversable that contains expected elements in any order.
+   * Matches Javaslang {@link Traversable} that contains expected elements in any order.
    *
    * @param items The expected elements.
    */
