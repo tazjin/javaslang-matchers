@@ -6,11 +6,11 @@ Javaslang Hamcrest matchers
 Provides a set of useful Hamcrest matchers for operating on Javaslang values.
 
 This makes it possible to easily define Hamcrest-style assertions on types such as
-`Option<T>` or Try<T>`.
+`Option<T>` or `Try<T>`.
 
 ## Installation
 
-This project is published on [Jitpack][]).
+This project is published on [Jitpack][].
 
 Add this to your `pom.xml`:
 
