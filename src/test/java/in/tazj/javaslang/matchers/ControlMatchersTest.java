@@ -13,6 +13,8 @@ import static in.tazj.javaslang.matchers.ControlMatchers.isFailure;
 import static in.tazj.javaslang.matchers.ControlMatchers.isLeft;
 import static in.tazj.javaslang.matchers.ControlMatchers.isRight;
 import static in.tazj.javaslang.matchers.ControlMatchers.isSuccess;
+import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.emptyString;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
@@ -38,6 +40,12 @@ public class ControlMatchersTest {
     assertThat(Try.of(() -> {
       throw new Exception();
     }), not(isSuccess()));
+  }
+
+  @Test
+  public void testIsSuccessMatcher() throws Exception {
+    assertThat(Try.success("fnord"), isSuccess(not(emptyString())));
+    assertThat(Try.failure(new Exception()), not(isSuccess(anything())));
   }
 
   @Test

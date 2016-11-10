@@ -30,34 +30,34 @@ public class CollectionMatchersTest {
 
   @Test
   public void testHasSize() throws Exception {
-    assertThat(List.of(1,2,3,4,5), hasSize(5));
+    assertThat(List.of(1, 2, 3, 4, 5), hasSize(5));
     assertThat(List.empty(), not(hasSize(5)));
   }
 
   @Test
   public void testSizeMatcher() throws Exception {
-    assertThat(List.of(1,2,3), hasSize(lessThan(20)));
-    assertThat(List.of(1,2,3), not(hasSize(lessThan(2))));
+    assertThat(List.of(1, 2, 3), hasSize(lessThan(20)));
+    assertThat(List.of(1, 2, 3), not(hasSize(lessThan(2))));
   }
 
   @Test
   public void testContainsElement() throws Exception {
-    assertThat(List.of(1,2,3), containsElement(2));
-    assertThat(List.of(1,2,3), not(containsElement(4)));
+    assertThat(List.of(1, 2, 3), containsElement(2));
+    assertThat(List.of(1, 2, 3), not(containsElement(4)));
     assertThat(List.empty(), not(containsElement(1)));
   }
 
   @Test
   public void testContainsAny() throws Exception {
-    assertThat(List.of(1,2,3), containsAny(is(1)));
-    assertThat(List.of(2,3,4), not(containsAny(is(1))));
+    assertThat(List.of(1, 2, 3), containsAny(is(1)));
+    assertThat(List.of(2, 3, 4), not(containsAny(is(1))));
     assertThat(List.empty(), not(containsAny(is(1))));
   }
 
   @Test
   public void testContainsInAnyOrder() throws Exception {
-    assertThat(List.of(3,2,1), containsInAnyOrder(List.of(1,2,3)));
-    assertThat(List.empty(), not(containsInAnyOrder(List.of(1,2,3))));
+    assertThat(List.of(3, 2, 1), containsInAnyOrder(List.of(1, 2, 3)));
+    assertThat(List.empty(), not(containsInAnyOrder(List.of(1, 2, 3))));
   }
 
   @Test
@@ -77,13 +77,13 @@ public class CollectionMatchersTest {
           }
         });
 
-    containsInAnyOrder(List.of(1,2,3,4,5,6)).describeMismatch(List.of(1,2,3), mismatchDescription);
-    assertThat(output[0], containsInAnyOrder(List.of(4,5,6)));
+    containsInAnyOrder(List.of(1, 2, 3, 4, 5, 6)).describeMismatch(List.of(1, 2, 3), mismatchDescription);
+    assertThat(output[0], containsInAnyOrder(List.of(4, 5, 6)));
   }
 
   @Test
   public void testAllMatch() {
-    assertThat(List.of(1,2,3), allMatch(lessThan(5)));
-    assertThat(List.of(1,2,6), not(allMatch(lessThan(5))));
+    assertThat(List.of(1, 2, 3), allMatch(lessThan(5)));
+    assertThat(List.of(1, 2, 6), not(allMatch(lessThan(5))));
   }
 }
