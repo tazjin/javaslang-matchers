@@ -8,7 +8,7 @@ import javaslang.collection.Traversable;
 
 /**
  * Provides Hamcrest matchers for Javaslang collection types.
- * */
+ */
 public class CollectionMatchers {
   /**
    * Matches empty Javaslang {@link Traversable}.
@@ -64,7 +64,30 @@ public class CollectionMatchers {
   }
 
   /**
-   * Matches Javaslang {@link Traversable} that contains a certain element.
+   * Matches Javaslang {@link Traversable} with a size matching a provided matcher.
+   *
+   * @param matcher A Hamcrest matcher to match the expected size.
+   */
+  public static <T extends Traversable> Matcher<T> hasSize(Matcher<Integer> matcher) {
+    return new TypeSafeMatcher<T>() {
+      @Override
+      protected boolean matchesSafely(T t) {
+        if (t.hasDefiniteSize()) {
+          return matcher.matches(t.size());
+        }
+        return false;
+      }
+
+      @Override
+      public void describeTo(Description description) {
+        description.appendText("Collection size should match: ");
+        matcher.describeTo(description);
+      }
+    };
+  }
+
+  /**
+   * Matches a Javaslang {@link Traversable} that contains a certain element.
    *
    * @param element The expected element.
    */
@@ -83,7 +106,28 @@ public class CollectionMatchers {
   }
 
   /**
-   * Matches Javaslang {@link Traversable} that contains expected elements in any order.
+   * Matches a Javaslang {@link Traversable} that contains at least one element matching the
+   * supplied matcher.
+   *
+   * @param matcher The element matcher.
+   */
+  public static <E, T extends Traversable<E>> Matcher<T> containsAny(Matcher<E> matcher) {
+    return new TypeSafeMatcher<T>() {
+      @Override
+      protected boolean matchesSafely(T t) {
+        return t.find(matcher::matches).isDefined();
+      }
+
+      @Override
+      public void describeTo(Description description) {
+        description.appendText("At least one element should match: ");
+        matcher.describeTo(description);
+      }
+    };
+  }
+
+  /**
+   * Matches a Javaslang {@link Traversable} that contains expected elements in any order.
    *
    * @param items The expected elements.
    */
@@ -105,6 +149,26 @@ public class CollectionMatchers {
         final Iterable<E> missing = items.partition(t::contains)._2();
         mismatch.appendText("Collection is missing elements: ")
             .appendValueList("[", ",", "]", missing);
+      }
+    };
+  }
+
+  /**
+   * Matches a Javaslang {@link Traversable} whose elements all match the supplied element matcher.
+   *
+   * @param matcher The element matcher.
+   */
+  public static <E, T extends Traversable<E>> Matcher<T> allMatch(Matcher<E> matcher) {
+    return new TypeSafeMatcher<T>() {
+      @Override
+      protected boolean matchesSafely(T t) {
+        return t.forAll(matcher::matches);
+      }
+
+      @Override
+      public void describeTo(Description description) {
+        description.appendText("All elements should match: ");
+        matcher.describeTo(description);
       }
     };
   }

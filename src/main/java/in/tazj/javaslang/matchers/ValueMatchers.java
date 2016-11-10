@@ -8,7 +8,7 @@ import javaslang.Value;
 
 /**
  * Provides Hamcret matchers that can be used with any Javaslang value type.
- * */
+ */
 public class ValueMatchers {
   /**
    * Matches any empty (undefined) Javaslang {@link Value}.
