@@ -1,10 +1,8 @@
 package in.tazj.javaslang.matchers;
 
 import org.hamcrest.Description;
+import org.hamcrest.StringDescription;
 import org.junit.Test;
-import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import javaslang.collection.List;
 
@@ -18,8 +16,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
 
 public class CollectionMatchersTest {
   @Test
@@ -29,15 +25,39 @@ public class CollectionMatchersTest {
   }
 
   @Test
+  public void testIsEmptyMismatch() {
+    final Description description = new StringDescription();
+    final String expected = "Collection was expected to be empty but has size <1>";
+    isEmpty().describeMismatch(List.of(1), description);
+    assertThat(description.toString(), is(expected));
+  }
+
+  @Test
   public void testHasSize() throws Exception {
     assertThat(List.of(1, 2, 3, 4, 5), hasSize(5));
     assertThat(List.empty(), not(hasSize(5)));
   }
 
   @Test
-  public void testSizeMatcher() throws Exception {
+  public void testHasSizeMismatch() {
+    final Description description = new StringDescription();
+    final String expected = "Collection should have size <1> but actually has size <2>";
+    hasSize(1).describeMismatch(List.of(1, 2), description);
+    assertThat(description.toString(), is(expected));
+  }
+
+  @Test
+  public void testHasSizeMatcher() throws Exception {
     assertThat(List.of(1, 2, 3), hasSize(lessThan(20)));
     assertThat(List.of(1, 2, 3), not(hasSize(lessThan(2))));
+  }
+
+  @Test
+  public void testHasSizeMatcherMismatch() {
+    final Description description = new StringDescription();
+    final String expected = "Collection size does not match a value less than <2>, size was <3>";
+    hasSize(lessThan(2)).describeMismatch(List.of(1, 2, 3), description);
+    assertThat(description.toString(), is(expected));
   }
 
   @Test
@@ -55,6 +75,15 @@ public class CollectionMatchersTest {
   }
 
   @Test
+  public void testContainsAnyMismatch() {
+    final Description description = new StringDescription();
+    final String expected =
+        "Collection expected to contain a value matching 'is <5>' but found <List(1, 2)>";
+    containsAny(is(5)).describeMismatch(List.of(1, 2), description);
+    assertThat(description.toString(), is(expected));
+  }
+
+  @Test
   public void testContainsInAnyOrder() throws Exception {
     assertThat(List.of(3, 2, 1), containsInAnyOrder(List.of(1, 2, 3)));
     assertThat(List.empty(), not(containsInAnyOrder(List.of(1, 2, 3))));
@@ -62,28 +91,24 @@ public class CollectionMatchersTest {
 
   @Test
   public void testContainsInAnyOrderMismatch() {
-    // Hack to be able to set this list in the Answer
-    final List[] output = new List[1];
-    final Description mismatchDescription = Mockito.mock(Description.class);
-
-    Mockito.when(mismatchDescription.appendText(anyString())).thenReturn(mismatchDescription);
-    Mockito.when(mismatchDescription
-        .appendValueList(anyString(), anyString(), anyString(), any(Iterable.class)))
-        .then(new Answer<Description>() {
-          @Override
-          public Description answer(InvocationOnMock invocationOnMock) throws Throwable {
-            output[0] = (List) invocationOnMock.getArguments()[3];
-            return mismatchDescription;
-          }
-        });
-
-    containsInAnyOrder(List.of(1, 2, 3, 4, 5, 6)).describeMismatch(List.of(1, 2, 3), mismatchDescription);
-    assertThat(output[0], containsInAnyOrder(List.of(4, 5, 6)));
+    final Description description = new StringDescription();
+    final String expected = "Collection is missing elements: [<4>,<5>,<6>]";
+    containsInAnyOrder(List.of(1, 2, 3, 4, 5, 6)).describeMismatch(List.of(1, 2, 3), description);
+    assertThat(description.toString(), is(expected));
   }
 
   @Test
   public void testAllMatch() {
     assertThat(List.of(1, 2, 3), allMatch(lessThan(5)));
     assertThat(List.of(1, 2, 6), not(allMatch(lessThan(5))));
+  }
+
+  @Test
+  public void testAllMatchMismatch() {
+    final Description description = new StringDescription();
+    final String expected =
+        "All elements should match 'is <true>' but found non-matching elements: [<false>,<false>]";
+    allMatch(is(true)).describeMismatch(List.of(false, true, false), description);
+    assertThat(description.toString(), is(expected));
   }
 }

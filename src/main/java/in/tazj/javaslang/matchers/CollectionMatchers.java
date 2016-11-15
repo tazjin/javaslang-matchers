@@ -82,8 +82,18 @@ public class CollectionMatchers {
 
       @Override
       public void describeTo(Description description) {
-        description.appendText("Collection size should match: ");
-        matcher.describeTo(description);
+        description
+            .appendText("Collection size should match: ")
+            .appendDescriptionOf(matcher);
+      }
+
+      @Override
+      public void describeMismatchSafely(T t, Description mismatch) {
+        mismatch
+            .appendText("Collection size does not match ")
+            .appendDescriptionOf(matcher)
+            .appendText(", size was ")
+            .appendValue(t.size());
       }
     };
   }
@@ -115,8 +125,18 @@ public class CollectionMatchers {
 
       @Override
       public void describeTo(Description description) {
-        description.appendText("At least one element should match: ");
-        matcher.describeTo(description);
+        description
+            .appendText("At least one element should match: ")
+            .appendDescriptionOf(matcher);
+      }
+
+      @Override
+      public void describeMismatchSafely(T t, Description mismatch) {
+        mismatch
+            .appendText("Collection expected to contain a value matching '")
+            .appendDescriptionOf(matcher)
+            .appendText("' but found ")
+            .appendValue(t);
       }
     };
   }
@@ -135,14 +155,16 @@ public class CollectionMatchers {
 
       @Override
       public void describeTo(Description description) {
-        description.appendText("Collection should contain: ")
+        description
+            .appendText("Collection should contain: ")
             .appendValueList("[", ",", "]", items);
       }
 
       @Override
       public void describeMismatchSafely(T t, Description mismatch) {
         final Iterable<E> missing = items.partition(t::contains)._2();
-        mismatch.appendText("Collection is missing elements: ")
+        mismatch
+            .appendText("Collection is missing elements: ")
             .appendValueList("[", ",", "]", missing);
       }
     };
@@ -162,8 +184,19 @@ public class CollectionMatchers {
 
       @Override
       public void describeTo(Description description) {
-        description.appendText("All elements should match: ");
-        matcher.describeTo(description);
+        description
+            .appendText("All elements should match: ")
+            .appendDescriptionOf(matcher);
+      }
+
+      @Override
+      public void describeMismatchSafely(T t, Description mismatch) {
+        mismatch
+            .appendText("All elements should match '")
+            .appendDescriptionOf(matcher)
+            .appendText("' but found non-matching elements: ");
+
+        mismatch.appendValueList("[", ",", "]", t.filter(e -> !matcher.matches(e)).toJavaList());
       }
     };
   }

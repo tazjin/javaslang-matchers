@@ -27,8 +27,9 @@ public class ControlMatchers {
 
       @Override
       public void describeTo(Description description) {
-        description.appendValue("Option that contains value matching ");
-        matcher.describeTo(description);
+        description
+            .appendValue("Option that contains value matching ")
+            .appendDescriptionOf(matcher);
       }
 
       @Override
@@ -83,8 +84,9 @@ public class ControlMatchers {
 
       @Override
       public void describeTo(Description description) {
-        description.appendText("Successful Try should contain value that matches: ");
-        matcher.describeTo(description);
+        description
+            .appendText("Successful Try should contain value that matches: ")
+            .appendDescriptionOf(matcher);
       }
 
       @Override
@@ -92,7 +94,11 @@ public class ControlMatchers {
         if (aTry.isFailure()) {
           mismatch.appendText("Expected success but got ").appendValue(aTry.getCause());
         } else {
-          mismatch.appendText("Expected successful Try but got ");
+          mismatch
+              .appendText("Expected successful Try value matching '")
+              .appendDescriptionOf(matcher)
+              .appendText("' but ");
+
           matcher.describeMismatch(aTry.get(), mismatch);
         }
       }
@@ -118,7 +124,13 @@ public class ControlMatchers {
 
       @Override
       public void describeTo(Description description) {
-        description.appendText("Try should have failed");
+        description.appendText("unsuccessful Try");
+      }
+
+      public void describeMismatchSafely(Try aTry, Description mismatch) {
+        mismatch
+            .appendText("Try should not have succeeded, but was ")
+            .appendValue(aTry);
       }
     };
   }
@@ -145,8 +157,14 @@ public class ControlMatchers {
 
       @Override
       public void describeMismatchSafely(Try aTry, Description mismatch) {
-        mismatch.appendText("Failure type is ").appendText(aTry.getCause().getClass().getName())
-            .appendText(" but expected ").appendText(clazz.getName());
+        aTry.onFailure(cause -> mismatch
+            .appendText("Failure type is ")
+            .appendText(cause.getClass().getSimpleName())
+            .appendText(" but expected ")
+            .appendText(clazz.getSimpleName()));
+        aTry.onSuccess(val -> mismatch
+            .appendText("Expected failure, but found successful Try with value: ")
+            .appendValue(val));
       }
     };
   }
@@ -165,8 +183,9 @@ public class ControlMatchers {
 
       @Override
       public void describeTo(Description description) {
-        description.appendText("»Either« should contain a »Right« value matching: ");
-        matcher.describeTo(description);
+        description
+            .appendText("»Either« should contain a »Right« value matching: ")
+            .appendDescriptionOf(matcher);
       }
 
       @Override
@@ -175,10 +194,10 @@ public class ControlMatchers {
           mismatch.appendText("Expected matching »Right« value, but got: ");
           matcher.describeMismatch(either.get(), mismatch);
         } else {
-          mismatch.appendText("Expected matching »Right« value, but got »Left«: ")
-              .appendValue(either);
+          mismatch
+              .appendText("Expected matching »Right« value, but got »Left«: ")
+              .appendValue(either.getLeft());
         }
-
       }
     };
   }
@@ -214,10 +233,10 @@ public class ControlMatchers {
           mismatch.appendText("Expected matching »Left« value, but got: ");
           matcher.describeMismatch(either.getLeft(), mismatch);
         } else {
-          mismatch.appendText("Expected matching »Left« value, but got »Right«: ")
-              .appendValue(either);
+          mismatch
+              .appendText("Expected matching »Left« value, but got »Right«: ")
+              .appendValue(either.get());
         }
-
       }
     };
   }
