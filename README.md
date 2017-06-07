@@ -1,9 +1,9 @@
-Javaslang Hamcrest matchers
-===========================
+Vavr Hamcrest matchers
+======================
 
-[![Build Status](https://travis-ci.org/tazjin/javaslang-matchers.svg?branch=master)](https://travis-ci.org/tazjin/javaslang-matchers)
+[![Build Status](https://travis-ci.org/tazjin/vavr-matchers.svg?branch=master)](https://travis-ci.org/tazjin/vavr-matchers)
 
-Provides a set of useful Hamcrest matchers for operating on Javaslang values.
+Provides a set of useful Hamcrest matchers for operating on [Vavr](http://www.vavr.io) values.
 
 This makes it possible to easily define Hamcrest-style assertions on types such as
 `Option<T>` or `Try<T>`.
@@ -25,8 +25,8 @@ Add this to your `pom.xml`:
 <dependencies>
   <dependency>
     <groupId>in.tazj</groupId>
-    <artifactId>javaslang-matchers</artifactId>
-    <version>1.0</version>
+    <artifactId>vavr-matchers</artifactId>
+    <version>1.2</version>
     <scope>test</scope>
   </dependency>
 </dependencies>
@@ -38,5 +38,5 @@ Consult the [documentation][] for usage instructions. Most of it should be prett
 
 File issues and feature requests if you have any!
 
-[documentation]: https://tazjin.github.io/javaslang-matchers/
+[documentation]: https://tazjin.github.io/vavr-matchers/
 [Jitpack]: https://jitpack.io/
