@@ -1,10 +1,11 @@
-package in.tazj.javaslang.matchers;
+package in.tazj.vavr.matchers;
 
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Test;
 
-import javaslang.collection.List;
+import io.vavr.collection.List;
 
-import static in.tazj.javaslang.matchers.ValueMatchers.isEmpty;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
 
@@ -15,9 +16,9 @@ public class ValueMatchersTest {
   @Test
   public void testIsEmpty() {
     final List emptyList = List.of();
-    assertThat(emptyList, isEmpty());
+    MatcherAssert.assertThat(emptyList, ValueMatchers.isEmpty());
 
     final List nonEmptyList = List.of(1);
-    assertThat(nonEmptyList, not(isEmpty()));
+    MatcherAssert.assertThat(nonEmptyList, Matchers.not(ValueMatchers.isEmpty()));
   }
 }
