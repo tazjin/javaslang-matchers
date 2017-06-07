@@ -1,19 +1,19 @@
-package in.tazj.javaslang.matchers;
+package in.tazj.vavr.matchers;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-import javaslang.collection.Traversable;
+import io.vavr.collection.Traversable;
 
 import static org.hamcrest.Matchers.is;
 
 /**
- * Provides Hamcrest matchers for Javaslang collection types.
+ * Provides Hamcrest matchers for Vavr collection types.
  */
 public class CollectionMatchers {
   /**
-   * Matches empty Javaslang {@link Traversable}.
+   * Matches empty Vavr {@link Traversable}.
    */
   public static <T extends Traversable> Matcher<T> isEmpty() {
     return new TypeSafeMatcher<T>() {
@@ -36,7 +36,7 @@ public class CollectionMatchers {
   }
 
   /**
-   * Matches Javaslang {@link Traversable} with a given size.
+   * Matches Vavr {@link Traversable} with a given size.
    *
    * @param size The expected size of the traversable.
    */
@@ -66,7 +66,7 @@ public class CollectionMatchers {
   }
 
   /**
-   * Matches Javaslang {@link Traversable} with a size matching a provided matcher.
+   * Matches Vavr {@link Traversable} with a size matching a provided matcher.
    *
    * @param matcher A Hamcrest matcher to match the expected size.
    */
@@ -99,7 +99,7 @@ public class CollectionMatchers {
   }
 
   /**
-   * Matches a Javaslang {@link Traversable} that contains a certain element.
+   * Matches a Vavr {@link Traversable} that contains a certain element.
    *
    * This matcher is deprecated and you should use containsAny(is(element)) instead.
    *
@@ -111,7 +111,7 @@ public class CollectionMatchers {
   }
 
   /**
-   * Matches a Javaslang {@link Traversable} that contains at least one element matching the
+   * Matches a Vavr {@link Traversable} that contains at least one element matching the
    * supplied matcher.
    *
    * @param matcher The element matcher.
@@ -142,7 +142,7 @@ public class CollectionMatchers {
   }
 
   /**
-   * Matches a Javaslang {@link Traversable} that contains expected elements in any order.
+   * Matches a Vavr {@link Traversable} that contains expected elements in any order.
    *
    * @param items The expected elements.
    */
@@ -171,7 +171,7 @@ public class CollectionMatchers {
   }
 
   /**
-   * Matches a Javaslang {@link Traversable} whose elements all match the supplied element matcher.
+   * Matches a Vavr {@link Traversable} whose elements all match the supplied element matcher.
    *
    * @param matcher The element matcher.
    */

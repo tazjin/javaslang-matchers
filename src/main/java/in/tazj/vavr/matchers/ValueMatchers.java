@@ -1,17 +1,17 @@
-package in.tazj.javaslang.matchers;
+package in.tazj.vavr.matchers;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-import javaslang.Value;
+import io.vavr.Value;
 
 /**
- * Provides Hamcret matchers that can be used with any Javaslang value type.
+ * Provides Hamcret matchers that can be used with any Vavr value type.
  */
 public class ValueMatchers {
   /**
-   * Matches any empty (undefined) Javaslang {@link Value}.
+   * Matches any empty (undefined) Vavr {@link Value}.
    */
   public static <T extends Value> Matcher<T> isEmpty() {
     return new TypeSafeMatcher<T>() {

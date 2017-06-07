@@ -1,17 +1,17 @@
-package in.tazj.javaslang.matchers;
+package in.tazj.vavr.matchers;
 
 import org.hamcrest.Description;
 import org.hamcrest.StringDescription;
 import org.junit.Test;
 
-import javaslang.collection.List;
+import io.vavr.collection.List;
 
-import static in.tazj.javaslang.matchers.CollectionMatchers.allMatch;
-import static in.tazj.javaslang.matchers.CollectionMatchers.containsAny;
-import static in.tazj.javaslang.matchers.CollectionMatchers.containsElement;
-import static in.tazj.javaslang.matchers.CollectionMatchers.containsInAnyOrder;
-import static in.tazj.javaslang.matchers.CollectionMatchers.hasSize;
-import static in.tazj.javaslang.matchers.CollectionMatchers.isEmpty;
+import static in.tazj.vavr.matchers.CollectionMatchers.allMatch;
+import static in.tazj.vavr.matchers.CollectionMatchers.containsAny;
+import static in.tazj.vavr.matchers.CollectionMatchers.containsElement;
+import static in.tazj.vavr.matchers.CollectionMatchers.containsInAnyOrder;
+import static in.tazj.vavr.matchers.CollectionMatchers.hasSize;
+import static in.tazj.vavr.matchers.CollectionMatchers.isEmpty;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.not;
