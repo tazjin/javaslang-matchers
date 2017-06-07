@@ -1,10 +1,10 @@
-package in.tazj.javaslang.matchers;
+package in.tazj.vavr.matchers;
 
 import org.junit.Test;
 
-import javaslang.collection.List;
+import io.vavr.collection.List;
 
-import static in.tazj.javaslang.matchers.ValueMatchers.isEmpty;
+import static in.tazj.vavr.matchers.ValueMatchers.isEmpty;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
 

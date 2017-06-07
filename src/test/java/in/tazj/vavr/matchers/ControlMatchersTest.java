@@ -1,4 +1,4 @@
-package in.tazj.javaslang.matchers;
+package in.tazj.vavr.matchers;
 
 import org.hamcrest.Description;
 import org.hamcrest.StringDescription;
@@ -6,17 +6,17 @@ import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
 
-import javaslang.control.Either;
-import javaslang.control.Option;
-import javaslang.control.Try;
+import io.vavr.control.Either;
+import io.vavr.control.Option;
+import io.vavr.control.Try;
 
-import static in.tazj.javaslang.matchers.ControlMatchers.hasFailedWith;
-import static in.tazj.javaslang.matchers.ControlMatchers.isDefined;
-import static in.tazj.javaslang.matchers.ControlMatchers.isEmpty;
-import static in.tazj.javaslang.matchers.ControlMatchers.isFailure;
-import static in.tazj.javaslang.matchers.ControlMatchers.isLeft;
-import static in.tazj.javaslang.matchers.ControlMatchers.isRight;
-import static in.tazj.javaslang.matchers.ControlMatchers.isSuccess;
+import static in.tazj.vavr.matchers.ControlMatchers.hasFailedWith;
+import static in.tazj.vavr.matchers.ControlMatchers.isDefined;
+import static in.tazj.vavr.matchers.ControlMatchers.isEmpty;
+import static in.tazj.vavr.matchers.ControlMatchers.isFailure;
+import static in.tazj.vavr.matchers.ControlMatchers.isLeft;
+import static in.tazj.vavr.matchers.ControlMatchers.isRight;
+import static in.tazj.vavr.matchers.ControlMatchers.isSuccess;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.emptyString;
 import static org.hamcrest.Matchers.is;

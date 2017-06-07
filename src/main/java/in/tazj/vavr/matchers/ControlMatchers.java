@@ -1,22 +1,22 @@
-package in.tazj.javaslang.matchers;
+package in.tazj.vavr.matchers;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.hamcrest.core.IsAnything;
 
-import javaslang.control.Either;
-import javaslang.control.Either.Left;
-import javaslang.control.Either.Right;
-import javaslang.control.Option;
-import javaslang.control.Try;
+import io.vavr.control.Either;
+import io.vavr.control.Either.Left;
+import io.vavr.control.Either.Right;
+import io.vavr.control.Option;
+import io.vavr.control.Try;
 
 /**
- * Provides Hamcrest matchers for types from Javaslang's control package.
+ * Provides Hamcrest matchers for types from Vavr's control package.
  */
 public class ControlMatchers {
   /**
-   * Matches a Javaslang {@link Option} that has a matching defined value.
+   * Matches a Vavr {@link Option} that has a matching defined value.
    */
   public static <T> Matcher<Option<T>> isDefined(Matcher<T> matcher) {
     return new TypeSafeMatcher<Option<T>>() {
@@ -44,14 +44,14 @@ public class ControlMatchers {
   }
 
   /**
-   * Matches a Javaslang {@link Option} that has any defined value.
+   * Matches a Vavr {@link Option} that has any defined value.
    */
   public static <T> Matcher<Option<T>> isDefined() {
     return isDefined(new IsAnything<T>());
   }
 
   /**
-   * Matches a Javaslang {@link Option} that has no defined value.
+   * Matches a Vavr {@link Option} that has no defined value.
    */
   public static Matcher<Option> isEmpty() {
     return new TypeSafeMatcher<Option>() {
@@ -73,7 +73,7 @@ public class ControlMatchers {
   }
 
   /**
-   * Matches the value of a Javaslang {@link Try} that succeeded.
+   * Matches the value of a Vavr {@link Try} that succeeded.
    */
   public static <T> Matcher<Try<T>> isSuccess(Matcher<T> matcher) {
     return new TypeSafeMatcher<Try<T>>() {
@@ -106,14 +106,14 @@ public class ControlMatchers {
   }
 
   /**
-   * Matches a Javaslang {@link Try} that succeeded.
+   * Matches a Vavr {@link Try} that succeeded.
    */
   public static <T> Matcher<Try<T>> isSuccess() {
     return isSuccess(new IsAnything<T>());
   }
 
   /**
-   * Matches a Javaslang {@link Try} that failed.
+   * Matches a Vavr {@link Try} that failed.
    */
   public static Matcher<Try> isFailure() {
     return new TypeSafeMatcher<Try>() {
@@ -136,7 +136,7 @@ public class ControlMatchers {
   }
 
   /**
-   * Matches a Javaslang {@link Try} that failed with an expected exception type.
+   * Matches a Vavr {@link Try} that failed with an expected exception type.
    *
    * @param clazz The expected exception type.
    */
@@ -170,7 +170,7 @@ public class ControlMatchers {
   }
 
   /**
-   * Matches the {@link Right} value of a Javaslang {@link Either}.
+   * Matches the {@link Right} value of a Vavr {@link Either}.
    *
    * @param matcher Matcher for the right value.
    */
@@ -203,14 +203,14 @@ public class ControlMatchers {
   }
 
   /**
-   * Matches a Javaslang {@link Either} that contains any {@link Right} value.
+   * Matches a Vavr {@link Either} that contains any {@link Right} value.
    */
   public static <L, R> Matcher<Either<L, R>> isRight() {
     return isRight(new IsAnything<R>());
   }
 
   /**
-   * Matches the {@link Left} value of a Javaslang {@link Either}.
+   * Matches the {@link Left} value of a Vavr {@link Either}.
    *
    * @param matcher Matcher for the left value.
    */
@@ -242,7 +242,7 @@ public class ControlMatchers {
   }
 
   /**
-   * Matches a Javaslang {@link Either} that contains any {@link Left} value.
+   * Matches a Vavr {@link Either} that contains any {@link Left} value.
    */
   public static <L, R> Matcher<Either<L, R>> isLeft() {
     return isLeft(new IsAnything<L>());
